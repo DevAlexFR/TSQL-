@@ -10,7 +10,7 @@ go
 
 -- Acima e configuração da instancia para poder rodar openrowset
 
-drop table if EXISTS #Base
+drop table if EXISTS #Base -- deleta a temp caso exista
 
 	select *
 	into #Base
@@ -18,5 +18,5 @@ drop table if EXISTS #Base
 		'select * from [banco].[dbo].[tabela]'
 	)
 
-	insert into openrowset('SQLNCLI', 'Server=NameServer; Trusted_Connection=yes;', [banco].[dbo].[tabela])
+	insert into openrowset('SQLNCLI', 'Server=NameServer; Trusted_Connection=yes;', [banco].[dbo].[tabela]) -- openrowset cria uma conexao temporaria com outra instancia
 	select * from #Base
